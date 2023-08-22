@@ -86,7 +86,7 @@ namespace gym
                     {
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
-                            DataTable dt = (DataTable)dataGridView1.DataSource; // Bu satırı ekledik
+                            DataTable dt = (DataTable)dataGridView1.DataSource; 
                             if (dt != null)
                             {
                                 workbook.Worksheets.Add(dt, "Rapor");

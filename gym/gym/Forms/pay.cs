@@ -56,22 +56,21 @@ namespace gym
 
         private void pay_Load(object sender, EventArgs e)
         {
-                // DataGridView veri kaynağını ayarlayın (örneğin bir DataTable)
+                
                 DataTable dataTable = new DataTable();
                 dataTable.Columns.Add("Ay", typeof(string));
                 dataTable.Columns.Add("Odeme", typeof(decimal));
-                // DataTable'e veriler eklemeyi unutmayın
-
-                dataGridView1.DataSource = dataTable; // DataGridView'in veri kaynağını ayarlayın
-
+               
+                dataGridView1.DataSource = dataTable; 
 
 
 
-            // DataGridView'dan veri alın
-            _ = (DataTable)dataGridView1.DataSource; // DataGridView'in veri kaynağını burada doğru şekilde ayarlayın
 
-            // Chart'a veri yükleme
-            chart1.Series.Clear(); // Önce mevcut veri serilerini temizle
+           
+            _ = (DataTable)dataGridView1.DataSource; 
+
+            
+            chart1.Series.Clear(); 
             foreach (DataColumn column in dataTable.Columns)
             {
                 if (column.DataType == typeof(double) || column.DataType == typeof(int))
@@ -82,7 +81,7 @@ namespace gym
                     foreach (DataRow row in dataTable.Rows)
                     {
                         double yValue = Convert.ToDouble(row[column]);
-                        string xValue = row[dataGridView1.Columns[0].DataPropertyName].ToString(); // X ekseninde kullanmak istediğiniz değer
+                        string xValue = row[dataGridView1.Columns[0].DataPropertyName].ToString(); 
 
                         series.Points.AddXY(xValue, yValue);
                     }
@@ -102,7 +101,7 @@ namespace gym
         {
             if (dataGridView1.DataSource is DataTable dataTable)
             {
-                chart1.Series.Clear(); // Önce mevcut veri serilerini temizle
+                chart1.Series.Clear(); 
 
                 Series series = new Series("Ödemeler");
                 series.ChartType = SeriesChartType.Column;
@@ -130,16 +129,16 @@ namespace gym
                         {
                             using (XLWorkbook workbook = new XLWorkbook())
                             {
-                                DataTable dt = (DataTable)dataGridView1.DataSource; // Bu satırı ekledik
+                                DataTable dt = (DataTable)dataGridView1.DataSource; 
                                 if (dt != null)
                                 {
                                     var worksheet = workbook.Worksheets.Add(dt, "Rapor");
 
-                                    // İkinci sütunu tarih biçiminde ayarlama
-                                    int tarihSutunuIndex = 2; // İkinci sütun (0 tabanlı index)
-                                    string tarihFormati = "dd.MM.yyyy"; // Tarih formatı
+                                    
+                                    int tarihSutunuIndex = 2; 
+                                    string tarihFormati = "dd.MM.yyyy"; 
 
-                                    for (int row = 2; row <= worksheet.Rows().Count(); row++) // İlk satır başlık olduğu varsayılır
+                                    for (int row = 2; row <= worksheet.Rows().Count(); row++) 
                                     {
                                         worksheet.Cell(row, tarihSutunuIndex + 2).Style.DateFormat.Format = tarihFormati;
                                     }
